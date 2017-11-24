@@ -161,9 +161,8 @@ def drawnode(draw,clust,x,y,scaling,labels):
 
 
 if __name__ == '__main__':
-    rownames, colnames, data = readfile("D:\\blogdata.txt")
+    rownames, colnames, data = readfile("blogdata.txt")
     [print(data[i]) for i in range(len(data))]
     clust = hcluster(data)
     print("result: ")
-    #drawdendrogram(clust, labels = ["小拳头的博客", "IT全栈 华强工作室", "Lovnx", "CSDN人工智能", "繁城落叶", "huojiao2006的博客", "WILL的博客", "学而思(xiejava的blog)"])
     drawdendrogram(clust, labels = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8"])

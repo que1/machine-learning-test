@@ -65,8 +65,11 @@ if __name__ == '__main__':
     for word in wordlist:
         out.write("\t%s" % word)
     out.write("\n")
+
+    mytitle = 1;
     for blog, wc in wordcounts.items():
-        out.write(blog)
+        out.write("a" + str(mytitle))
+        mytitle += 1
         for word in wordlist:
             if word in wc:
                 out.write("\t%s" % wc[word])
