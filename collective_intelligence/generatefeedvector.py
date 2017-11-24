@@ -59,7 +59,7 @@ if __name__ == '__main__':
             wordlist.append(w)
     print(wordlist)
 
-    out = open('/Users/q/program/blogdata.txt', 'w')
+    out = open('blogdata.txt', 'w')
     out.write("Blog")
     
     for word in wordlist:
