@@ -35,7 +35,11 @@ if __name__ == '__main__':
     feedlist = ["http://blog.csdn.net/xiaoquantouer/rss/list",
                 "http://blog.csdn.net/sunhuaqiang1/rss/list",
                 "http://blog.csdn.net/rickiyeat/rss/list",
-                "http://blog.csdn.net/qq_40027052/rss/list"]
+                "http://blog.csdn.net/qq_40027052/rss/list",
+                "http://blog.csdn.net/Leafage_M/article/rss/list",
+                "http://blog.csdn.net/huojiao2006/rss/list",
+                "http://blog.csdn.net/LEoe_/rss/list",
+                "http://blog.csdn.net/fullbug/rss/list"]
 
     for feedurl in feedlist:
         title, wc = getwordcounts(feedurl)
@@ -55,7 +59,7 @@ if __name__ == '__main__':
             wordlist.append(w)
     print(wordlist)
 
-    out = open('D:\\blogdata.txt', 'w')
+    out = open('/Users/q/program/blogdata.txt', 'w')
     out.write("Blog")
     
     for word in wordlist:
