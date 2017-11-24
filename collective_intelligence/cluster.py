@@ -82,7 +82,6 @@ def hcluster(rows, pearsondistance = pearson):
 
     return clust[0]
 
-
 def printclust(clust, labels = None, n = 0):
     for i in range(n):
         print(" ", end="")
@@ -160,9 +159,21 @@ def drawnode(draw,clust,x,y,scaling,labels):
         draw.text((x+5,y-7),labels[clust.id],(0,0,0))
 
 
+def rotatematrix(data):
+    newdata=[]
+    for i in range(len(data[0])):
+        newrow=[data[j][i] for j in range(len(data))]
+        newdata.append(newrow)
+    return newdata
+
 if __name__ == '__main__':
     rownames, colnames, data = readfile("blogdata.txt")
     [print(data[i]) for i in range(len(data))]
-    clust = hcluster(data)
+
+    newdata = rotatematrix(data)
+    [print(newdata[i]) for i in range(len(newdata))]
+
+    clust = hcluster(newdata)
     print("result: ")
-    drawdendrogram(clust, labels = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8"])
+    #drawdendrogram(clust, labels = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8"])
+    drawdendrogram(clust, labels = colnames)
