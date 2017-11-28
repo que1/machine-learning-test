@@ -39,7 +39,9 @@ if __name__ == '__main__':
                 "http://blog.csdn.net/Leafage_M/article/rss/list",
                 "http://blog.csdn.net/huojiao2006/rss/list",
                 "http://blog.csdn.net/LEoe_/rss/list",
-                "http://blog.csdn.net/fullbug/rss/list"]
+                "http://blog.csdn.net/fullbug/rss/list",
+                "feed://blog.csdn.net/FungLeo/article/rss/list",
+                "feed://blog.csdn.net/oopsoom/rss/list"]
 
     for feedurl in feedlist:
         title, wc = getwordcounts(feedurl)
