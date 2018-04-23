@@ -145,6 +145,10 @@ class naivebayes(classifier):
 
 class fisherclassifier(classifier):
 
+    def __init__(self, getfeatures):
+        classifier.__init__(self, getfeatures)
+        self.minimums = {}
+
     def cprob(self, f, cat):
         # The frequency of this feature in this category
         clf = self.fprob(f, cat)
@@ -185,6 +189,26 @@ class fisherclassifier(classifier):
             sum += term
         return min(sum, 1.0)
 
+    def classify(self, item, default=None):
+        # Loop through looking for the best result
+        best = default
+        max = 0.0
+        for c in self.categories():
+            p = self.fisherprob(item, c)
+            # Make sure it exceeds its minimum
+            if p > self.getminimum(c) and p > max:
+                best = c
+                max = p
+        return best
+
+    def setminimum(self, cat, min):
+        self.minimums[cat] = min
+
+    def getminimum(self, cat):
+        if cat not in self.minimums:
+            return 0
+        return self.minimums[cat]
+
 
 def sampletrain(cl):
     cl.train('Nobody owns the water.', 'good')
@@ -213,7 +237,12 @@ if __name__ == '__main__':
     '''
 
     cl3 = fisherclassifier(getwords)
-    print(cl3.cprob("quick", "good"))
-    print(cl3.cprob("money", "bad"))
-    # print(cl3.weightedprob("money", "bad", cl3.cprob))
+    print(cl3.cprob("quick rabbit", "good"))
+    print(cl3.cprob("quick rabbit", "bad"))
+    print(cl3.weightedprob("quick rabbit", "bad", cl3.cprob))
     print(cl3.fisherprob("quick rabbit", "good"))
+    print(cl3.classify("quick rabbit"))
+
+
+
+
