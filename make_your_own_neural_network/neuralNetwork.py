@@ -1,6 +1,7 @@
 import numpy
 import scipy.special
-import matplotlib.pyplot
+import scipy.misc
+# import matplotlib.pyplot
 import datetime
 
 class neuralNetwork:
@@ -50,10 +51,9 @@ class neuralNetwork:
         return final_outputs
 
 
-
 if __name__ == '__main__':
     nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print(nowTime)
+    print("start, ", nowTime)
     input_nodes = 784
     hidden_nodes = 200
     output_nodes = 10
@@ -66,13 +66,12 @@ if __name__ == '__main__':
     training_data_list = training_data_file.readlines()
     training_data_file.close()
     nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print(nowTime)
     # all_values = training_data_list[0].split(',')
     # image_array = numpy.asfarray(all_values[1:]).reshape((28, 28))
     # matplotlib.pyplot.imshow(image_array, cmap='Greys', interpolation='None')
     # matplotlib.pyplot.show()
     #
-    epochs = 5
+    epochs = 2
     for e in range(epochs):
         for record in training_data_list:
             all_values = record.split(',')
@@ -81,13 +80,13 @@ if __name__ == '__main__':
             targets[int(all_values[0])] = 0.99
             n.train(inputs, targets)
     nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print(nowTime)
+    print("training end, ", nowTime)
     #
     test_data_file = open("/Users/q/program/code_store/make_your_own_neural_network/mnist_test.csv", "r")
     test_data_list = test_data_file.readlines()
     test_data_file.close()
     nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print(nowTime)
+
     # all_values = test_data_list[0].split(',')
     # print(all_values[0])
     # inputs = (numpy.asfarray(all_values[1:]) / 255.0 * 0.99) + 0.01
@@ -111,7 +110,21 @@ if __name__ == '__main__':
             scorecard.append(0)
     # print(scorecard)
     nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print(nowTime)
+    print("test end, ", nowTime)
     scorecard_array = numpy.asarray(scorecard)
     print("performance = ", scorecard_array.sum() / scorecard_array.size)
+
+    img_array = scipy.misc.imread("3.png", flatten=True)
+    # print(img_array)
+    # 常规数据0指黑色，255是白色，但是MNISt数据集使用相反的方式表示，所以需要用255去减
+    temp_img_data = 255.0 - img_array.reshape(784)
+    # print(img_data)
+    img_data = (temp_img_data / 255.0 * 0.99) + 0.01
+    # print(img_data)
+
+    outputs = n.query(img_data)
+    label = numpy.argmax(outputs)
+    print("outpus: ", outputs)
+    print("check result: ", label)
+
     pass
