@@ -55,9 +55,9 @@ if __name__ == '__main__':
     nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     print("start, ", nowTime)
     input_nodes = 784
-    hidden_nodes = 200
+    hidden_nodes = 100
     output_nodes = 10
-    learning_rate = 0.1
+    learning_rate = 0.2
     n = neuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
     # final_outputs = n.query([1.0, 0.5, -1.5])
     # print("final_outputs: \n" + str(final_outputs))
@@ -114,7 +114,7 @@ if __name__ == '__main__':
     scorecard_array = numpy.asarray(scorecard)
     print("performance = ", scorecard_array.sum() / scorecard_array.size)
 
-    img_array = scipy.misc.imread("3.png", flatten=True)
+    img_array = scipy.misc.imread("num6.png", flatten=True)
     # print(img_array)
     # 常规数据0指黑色，255是白色，但是MNISt数据集使用相反的方式表示，所以需要用255去减
     temp_img_data = 255.0 - img_array.reshape(784)
